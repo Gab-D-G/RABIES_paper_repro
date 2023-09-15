@@ -1,5 +1,5 @@
-**Reproducing preprocessing:**
-Every preprocessing script found within preprocess_call/ is structured similarly to the following:
+**Reproducing preprocessing (part 1 of the manuscript):**
+In the preprocess_call/ folder are found the .sh scripts conducting preprocessing for each dataset. Every preprocessing script found within preprocess_call/ is structured similarly to the following:
 
 ```sh
 #!/bin/bash
@@ -16,7 +16,6 @@ singularity run -B /scratch/m/mchakrav/desgab/data/multicenter/inputs/7_Cryo_aw_
 
 Instructions for reproducing preprocessing:
 1. Download the dataset from the online repository linked in the supplementary table listing datasets and their corresponding QC outcomes.
-2. Find the .sh script titled 'preprocess_{dataset_name}.sh' for the corresponding dataset. Download a Singularity image for the appropriate RABIES version (version 0.4.7 for datasets included in part 2, 0.3.3 for other datasets) (see instructions https://rabies.readthedocs.io/en/stable/installation.html). Provide the script with appropriate paths for the Singularity image (the .sif file), the input BIDS folder (the /nii_inputs:ro path), and the desired output folder (the /rabies_out path).
-2.5 For rat preprocessing, the Fischer 344 atlas (https://www.nearlab.xyz/fischer344atlas) must be downloaded and provided as input atlas. The script should be modified according to provide the appropriate path to the atlas folder and each specific associated file (see .sh scripts).
-3. Execute the .sh script with appropriate computational resources. If memory is overloaded, consider modulate the --local_threads option (https://rabies.readthedocs.io/en/stable/running_the_software.html)
-4. Preprocessing is non-deterministic, thus the quality control results may change slightly. For further steps, the quality control of registration must be carried out again by inspecting the outputs in the newly-generated preprocess_QC_report folder. 
+2. Find the .sh script titled 'preprocess_{dataset_name}.sh' for the corresponding dataset. Download a Singularity image for the appropriate RABIES version (version 0.4.7 for datasets included in part 2, 0.3.3 for other datasets) (see instructions https://rabies.readthedocs.io/en/stable/installation.html). Provide the script with appropriate paths for the Singularity image (the .sif file), the input BIDS folder (the /nii_inputs:ro path), and the desired output folder (the /rabies_out path). For rat datasets, the Fischer 344 atlas (https://www.nearlab.xyz/fischer344atlas) must be downloaded and provided as input atlas. The script should be modified according to provide the appropriate path to the atlas folder and each specific associated file (see .sh scripts).
+3. Execute the .sh script with appropriate computational resources. If memory is overloaded, consider modulating the --local_threads option (https://rabies.readthedocs.io/en/stable/running_the_software.html)
+4. Preprocessing is non-deterministic, thus the quality control results may change slightly. To reproduce results in part 2, the quality control of registration must be carried out again by inspecting the outputs in the newly-generated preprocess_QC_report folder and taking note of which scans have failed. 
